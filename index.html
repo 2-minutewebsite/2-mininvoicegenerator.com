@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2-Minute Invoice Generator - Fast & Professional</title>
+    <title>2-min Invoice Gen | Professional Invoicing Made Easy</title>
     <meta name="description" content="Create professional invoices in seconds. Free PDF download. Upgrade for premium templates and features.">
     <meta name="keywords" content="free invoice generator, online invoice maker, printable invoice template">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
             --secondary: #10b981;
             --accent: #f59e0b;
             --danger: #ef4444;
+            --dark-bg: #1a1a2e;
+            --dark-card: #16213e;
+            --dark-text: #e2e8f0;
+            --dark-border: #2d3748;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
             --gray-700: #374151;
@@ -29,9 +33,10 @@
         }
         
         body {
-            background-color: var(--gray-100);
-            color: var(--gray-700);
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         .container {
@@ -42,9 +47,9 @@
         
         /* Navigation Bar */
         .navbar {
-            background-color: white;
+            background-color: var(--dark-card);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
@@ -75,7 +80,7 @@
         }
         
         .nav-links a {
-            color: var(--gray-700);
+            color: var(--dark-text);
             text-decoration: none;
             transition: all 0.3s;
             font-weight: 500;
@@ -104,22 +109,98 @@
         }
         
         .login-btn {
-            background-color: white;
-            color: var(--danger);
-            border: 1px solid var(--danger);
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
         }
         
         .login-btn:hover {
-            background-color: rgba(239, 68, 68, 0.1);
+            background-color: rgba(79, 70, 229, 0.1);
         }
         
         .signup-btn {
-            background-color: var(--danger);
+            background-color: var(--primary);
             color: white;
         }
         
         .signup-btn:hover {
-            background-color: #dc2626;
+            background-color: var(--primary-dark);
+        }
+        
+        /* User Profile */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .user-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--dark-card);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 0;
+            min-width: 180px;
+            z-index: 100;
+            display: none;
+            border: 1px solid var(--dark-border);
+        }
+        
+        .user-profile:hover .user-menu {
+            display: block;
+        }
+        
+        .user-menu-item {
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .user-menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+        
+        .premium-badge {
+            background: var(--premium-gradient);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* Main Content (shown after login) */
+        .main-content {
+            display: block; /* Changed to block to show by default */
         }
         
         header {
@@ -139,22 +220,23 @@
         
         .subtitle {
             font-size: 1.2rem;
-            color: var(--gray-700);
+            color: var(--dark-text);
             margin-bottom: 1rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.9;
         }
         
         .invoice-container {
-            background-color: white;
+            background-color: var(--dark-card);
             border-radius: 0.75rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
             padding: 2.5rem;
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--dark-border);
         }
         
         .form-group {
@@ -165,17 +247,19 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--gray-900);
+            color: var(--dark-text);
             font-size: 0.95rem;
         }
         
         input, select, textarea {
             width: 100%;
             padding: 0.75rem 1rem;
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--dark-border);
             border-radius: 0.5rem;
             font-size: 1rem;
             transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--dark-text);
         }
         
         input:focus, select:focus, textarea:focus {
@@ -197,7 +281,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .items-table th {
@@ -211,7 +295,7 @@
         
         .items-table td {
             padding: 1rem;
-            border-bottom: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--dark-border);
         }
         
         .items-table tr:last-child td {
@@ -219,7 +303,7 @@
         }
         
         .items-table tr:hover td {
-            background-color: var(--gray-100);
+            background-color: rgba(255, 255, 255, 0.05);
         }
         
         .btn {
@@ -262,24 +346,22 @@
         
         .btn-outline {
             background-color: transparent;
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--dark-border);
+            color: var(--dark-text);
         }
         
         .btn-outline:hover {
-            background-color: var(--gray-100);
+            background-color: rgba(255, 255, 255, 0.05);
         }
         
         .text-center {
             text-align: center;
         }
         
-        .mt-4 {
-            margin-top: 1rem;
-        }
-        
-        .mt-8 {
-            margin-top: 2rem;
-        }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
         
         .watermark {
             position: absolute;
@@ -304,10 +386,10 @@
         }
         
         .feature-column {
-            background-color: white;
+            background-color: var(--dark-card);
             border-radius: 0.75rem;
             padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .feature-column.premium {
@@ -321,7 +403,7 @@
         .feature-column h3 {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            color: var(--gray-900);
+            color: var(--dark-text);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -340,8 +422,8 @@
         }
         
         .free .badge {
-            background-color: var(--gray-200);
-            color: var(--gray-700);
+            background-color: var(--dark-border);
+            color: var(--dark-text);
         }
         
         .feature-list {
@@ -351,7 +433,7 @@
         .feature-list li {
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--dark-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -367,6 +449,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--dark-text);
         }
         
         .feature-status {
@@ -381,6 +464,7 @@
             color: var(--danger);
         }
         
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -388,20 +472,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.8);
             z-index: 2000;
             justify-content: center;
             align-items: center;
         }
         
         .modal-content {
-            background-color: white;
-            padding: 2rem;
+            background-color: var(--dark-card);
             border-radius: 0.75rem;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: modalFadeIn 0.3s ease-out;
+            border: 1px solid var(--dark-border);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         @keyframes modalFadeIn {
@@ -419,7 +505,7 @@
             float: right;
             cursor: pointer;
             font-size: 1.5rem;
-            color: var(--gray-700);
+            color: var(--dark-text);
             transition: all 0.2s;
         }
         
@@ -427,6 +513,7 @@
             color: var(--primary);
         }
         
+        /* Payment Modal */
         .payment-options {
             display: flex;
             flex-wrap: wrap;
@@ -435,12 +522,13 @@
         }
         
         .payment-option {
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--dark-border);
             padding: 0.5rem 1rem;
             border-radius: 0.25rem;
             cursor: pointer;
             transition: all 0.2s;
             font-size: 0.9rem;
+            color: var(--dark-text);
         }
         
         .payment-option:hover {
@@ -456,6 +544,15 @@
             margin-right: 0.5rem;
         }
         
+        .payment-method {
+            display: none;
+        }
+        
+        .payment-method.active {
+            display: block;
+        }
+        
+        /* Logo Upload */
         .logo-upload {
             display: flex;
             align-items: center;
@@ -466,12 +563,12 @@
             width: 80px;
             height: 80px;
             border-radius: 0.5rem;
-            border: 1px dashed var(--gray-200);
+            border: 1px dashed var(--dark-border);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: var(--gray-100);
+            background-color: rgba(255, 255, 255, 0.05);
         }
         
         .logo-preview img {
@@ -479,6 +576,7 @@
             max-height: 100%;
         }
         
+        /* Template Selector */
         .template-selector {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -487,7 +585,7 @@
         }
         
         .template {
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--dark-border);
             border-radius: 0.5rem;
             padding: 1rem;
             cursor: pointer;
@@ -498,7 +596,7 @@
         .template:hover {
             border-color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .template.active {
@@ -508,7 +606,7 @@
         
         .template-preview {
             height: 100px;
-            background-color: var(--gray-100);
+            background-color: rgba(255, 255, 255, 0.05);
             margin-bottom: 1rem;
             position: relative;
             border-radius: 0.25rem;
@@ -519,6 +617,7 @@
             text-align: center;
             font-weight: 600;
             font-size: 0.95rem;
+            color: var(--dark-text);
         }
         
         .free-badge {
@@ -557,10 +656,11 @@
         
         /* Footer */
         footer {
-            background-color: var(--gray-900);
+            background-color: var(--dark-card);
             color: white;
             padding: 3rem 2rem 2rem;
             margin-top: 3rem;
+            border-top: 1px solid var(--dark-border);
         }
         
         .footer-container {
@@ -572,7 +672,7 @@
         }
         
         .footer-column h3 {
-            color: white;
+            color: var(--primary);
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             font-weight: 600;
@@ -587,38 +687,57 @@
         }
         
         .footer-column a {
-            color: var(--gray-200);
+            color: var(--dark-text);
             text-decoration: none;
             transition: all 0.3s;
             font-size: 0.95rem;
+            opacity: 0.8;
         }
         
         .footer-column a:hover {
-            color: white;
+            color: var(--primary);
             text-decoration: underline;
+            opacity: 1;
         }
         
         .copyright {
             text-align: center;
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--gray-700);
-            color: var(--gray-400);
+            border-top: 1px solid var(--dark-border);
+            color: var(--dark-text);
             font-size: 0.9rem;
+            opacity: 0.7;
         }
         
-        /* Auth Modals */
-        .auth-modal {
-            display: none;
+        /* Auth Pages */
+        .auth-container {
+            display: none; /* Changed to none to hide by default */
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            padding: 2rem;
         }
         
-        .auth-form {
-            max-width: 400px;
-            margin: 0 auto;
+        .auth-card {
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid var(--dark-border);
+        }
+        
+        .auth-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
         }
         
         .auth-form .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
         
         .auth-form label {
@@ -626,7 +745,8 @@
         }
         
         .auth-form input {
-            padding: 0.8rem 1rem;
+            padding: 0.9rem 1rem;
+            width: 100%;
         }
         
         .auth-submit {
@@ -640,6 +760,8 @@
             text-align: center;
             margin-top: 1.5rem;
             font-size: 0.95rem;
+            color: var(--dark-text);
+            opacity: 0.8;
         }
         
         .auth-footer a {
@@ -652,21 +774,86 @@
             text-decoration: underline;
         }
         
-        /* Contact Info Modal */
-        .contact-info {
-            padding: 1rem 0;
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
         }
         
-        .contact-info p {
-            margin-bottom: 1rem;
-            display: flex;
+        /* Success Page */
+        .success-container {
+            display: none;
+            justify-content: center;
             align-items: center;
-            gap: 0.5rem;
+            min-height: calc(100vh - 100px);
+            padding: 2rem;
+            text-align: center;
         }
         
-        .contact-info i {
-            width: 1.5rem;
+        .success-card {
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--dark-border);
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
             color: var(--primary);
+        }
+        
+        .success-message {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--dark-text);
+            opacity: 0.9;
+        }
+        
+        /* Policy Pages */
+        .policy-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .policy-container h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .policy-container h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .policy-container p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .policy-container ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .policy-container li {
+            margin-bottom: 0.5rem;
         }
         
         /* Responsive */
@@ -703,6 +890,10 @@
             h1 {
                 font-size: 2rem;
             }
+            
+            .invoice-container {
+                padding: 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -719,6 +910,22 @@
                 padding: 0.5rem 0.8rem;
                 font-size: 0.85rem;
             }
+            
+            .auth-card {
+                padding: 1.5rem;
+            }
+            
+            .success-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .user-name {
+                display: none;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -727,19 +934,20 @@
     <nav class="navbar">
         <a href="#" class="logo">
             <i class="fas fa-file-invoice"></i>
-            <span>2-Minute Invoice Generator</span>
+            <span>2-min Invoice Gen</span>
         </a>
         
         <div class="nav-links">
-            <a href="#home">Home</a>
+            <a href="#home" class="nav-home">Home</a>
             <a href="#about">About</a>
-            <a href="#contact">Contact Us</a>
-            <a href="#privacy">Privacy Policy</a>
+            <a href="#contact" class="nav-contact">Contact</a>
+            <a href="#privacy">Privacy</a>
             <a href="#terms">Terms</a>
             <a href="#refund">Refund Policy</a>
             <a href="#help">Help Center</a>
+            <a href="#faq">FAQs</a>
             
-            <div class="auth-buttons">
+            <div class="auth-buttons" id="auth-buttons">
                 <button class="auth-btn login-btn" id="open-login">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
@@ -747,272 +955,661 @@
                     <i class="fas fa-user-plus"></i> Sign Up
                 </button>
             </div>
+            
+            <div class="user-profile" id="user-profile" style="display: none;">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <span class="user-name" id="user-display-name">User</span>
+                <div class="user-menu">
+                    <a href="#" class="user-menu-item" id="profile-link">
+                        <i class="fas fa-user"></i> My Profile
+                    </a>
+                    <a href="#" class="user-menu-item" id="invoices-link">
+                        <i class="fas fa-file-invoice"></i> My Invoices
+                    </a>
+                    <a href="#" class="user-menu-item" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div class="container" id="home">
-        <header>
-            <h1>Create Professional Invoices in Minutes</h1>
-            <p class="subtitle">Generate, download, and send invoices effortlessly. Free to use with premium options available for businesses.</p>
-        </header>
-        
-        <div class="invoice-container">
-            <div class="watermark">FREE VERSION</div>
+    <!-- Main Content (shown after login) -->
+    <div class="main-content" id="main-content">
+        <div class="container" id="home">
+            <header>
+                <h1>Welcome to 2-min Invoice Gen</h1>
+                <p class="subtitle">Generate, download, and send professional invoices in minutes.</p>
+            </header>
             
-            <div class="logo-upload">
-                <div class="logo-preview" id="logo-preview">
-                    <i class="fas fa-camera" id="logo-placeholder"></i>
-                </div>
-                <div>
-                    <button id="upload-logo" class="btn btn-outline">
-                        <i class="fas fa-upload"></i> Upload Logo
-                    </button>
-                    <input type="file" id="logo-input" accept="image/*" style="display: none;">
-                    <p class="text-muted mt-1">Premium feature: High quality logo</p>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 mt-4">
-                <div class="form-group">
-                    <label for="from">Your Business Name</label>
-                    <input type="text" id="from" placeholder="Your Company LLC">
-                </div>
-                <div class="form-group">
-                    <label for="to">Client Name</label>
-                    <input type="text" id="to" placeholder="Client Company Inc">
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2">
-                <div class="form-group">
-                    <label for="invoice-number">Invoice #</label>
-                    <input type="text" id="invoice-number" value="INV-0001">
-                </div>
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date">
-                </div>
-            </div>
-            
-            <!-- Currency Selector -->
-            <div class="form-group currency-selector">
-                <label for="currency">Currency</label>
-                <select id="currency">
-                    <option value="USD">US Dollar ($)</option>
-                    <option value="INR" selected>Indian Rupee (₹)</option>
-                    <option value="EUR">Euro (€)</option>
-                    <option value="GBP">British Pound (£)</option>
-                    <option value="AUD">Australian Dollar (A$)</option>
-                    <option value="AED">UAE Dirham (د.إ)</option>
-                    <option value="SAR">Saudi Riyal (﷼)</option>
-                    <option value="QAR">Qatari Riyal (﷼)</option>
-                    <option value="PKR">Pakistani Rupee (₨)</option>
-                    <option value="CAD">Canadian Dollar (C$)</option>
-                    <option value="JPY">Japanese Yen (¥)</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="notes">Notes</label>
-                <textarea id="notes" rows="2" placeholder="Payment terms, thank you note, etc."></textarea>
-            </div>
-            
-            <h3>Choose Template Style</h3>
-            <div class="template-selector">
-                <div class="template active" data-template="modern">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #4f46e5, #10b981);"></div>
-                    <div class="template-name">Modern</div>
-                    <span class="free-badge">Free</span>
-                </div>
-                <div class="template" data-template="classic">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #374151, #6b7280);"></div>
-                    <div class="template-name">Classic</div>
-                    <span class="free-badge">Free</span>
-                </div>
-                <div class="template" data-template="minimal">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #f3f4f6, #e5e7eb); border: 1px solid #d1d5db;"></div>
-                    <div class="template-name">Minimal</div>
-                    <span class="free-badge">Free</span>
-                </div>
-                <div class="template premium-template" data-template="elegant">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #111827, #1f2937);"></div>
-                    <div class="template-name">Elegant</div>
-                    <span class="premium-badge">Premium</span>
-                </div>
-                <div class="template premium-template" data-template="creative">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #f59e0b, #ef4444);"></div>
-                    <div class="template-name">Creative</div>
-                    <span class="premium-badge">Premium</span>
-                </div>
-                <div class="template premium-template" data-template="professional">
-                    <div class="template-preview" style="background: linear-gradient(135deg, #1e40af, #1e3a8a);"></div>
-                    <div class="template-name">Professional</div>
-                    <span class="premium-badge">Premium</span>
-                </div>
-            </div>
-            
-            <h3 class="mt-4">Invoice Items</h3>
-            <table class="items-table">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th width="100">Quantity</th>
-                        <th width="150">Price</th>
-                        <th width="150">Total</th>
-                        <th width="50"></th>
-                    </tr>
-                </thead>
-                <tbody id="items">
-                    <tr>
-                        <td><input type="text" class="item-desc" placeholder="Service or product description"></td>
-                        <td><input type="number" class="item-qty" value="1" min="1"></td>
-                        <td><input type="number" class="item-price" placeholder="0.00" step="0.01"></td>
-                        <td class="item-total">₹0.00</td>
-                        <td><button class="btn btn-outline remove-item">×</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <button id="add-item" class="btn btn-outline">
-                <i class="fas fa-plus"></i> Add Item
-            </button>
-            
-            <div class="grid grid-cols-2 mt-8">
-                <div></div>
-                <div>
-                    <div class="form-group">
-                        <label for="tax-rate">Tax Rate (%)</label>
-                        <input type="number" id="tax-rate" value="0" min="0" max="100" step="0.1">
+            <div class="invoice-container">
+                <div class="watermark" id="watermark">FREE VERSION</div>
+                
+                <div class="logo-upload">
+                    <div class="logo-preview" id="logo-preview">
+                        <i class="fas fa-camera" id="logo-placeholder"></i>
                     </div>
-                    <table class="items-table">
-                        <tr>
-                            <td>Subtotal</td>
-                            <td id="subtotal">₹0.00</td>
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <td id="tax">₹0.00</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total</strong></td>
-                            <td id="total"><strong>₹0.00</strong></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="text-center mt-8">
-                <button id="generate-pdf" class="btn btn-primary">
-                    <i class="fas fa-file-pdf"></i> Download PDF Invoice
-                </button>
-                <div class="mt-4">
-                    <button id="upgrade-btn" class="btn btn-secondary">
-                        <i class="fas fa-crown"></i> Upgrade to Premium ($1/3months)
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Features Comparison -->
-            <div class="features-comparison">
-                <div class="feature-column free">
-                    <h3>
-                        <i class="fas fa-star"></i> Free Version
-                        <span class="badge">Free Forever</span>
-                    </h3>
-                    <ul class="feature-list">
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-file-invoice"></i> Basic Invoice Creation
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-file-pdf"></i> PDF Download
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-water"></i> Watermarked PDFs
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-palette"></i> 3 Basic Templates
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-save"></i> Save Invoices
-                            </span>
-                            <span class="feature-status not-available">✗ Not Available</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-image"></i> Custom Logo
-                            </span>
-                            <span class="feature-status not-available">✗ Not Available</span>
-                        </li>
-                    </ul>
+                    <div>
+                        <button id="upload-logo" class="btn btn-outline">
+                            <i class="fas fa-upload"></i> Upload Logo
+                        </button>
+                        <input type="file" id="logo-input" accept="image/*" style="display: none;">
+                        <p class="text-muted mt-1">Premium feature: High quality logo</p>
+                    </div>
                 </div>
                 
-                <div class="feature-column premium">
-                    <h3>
-                        <i class="fas fa-crown"></i> Premium Version
-                        <span class="badge">$1/3months</span>
-                    </h3>
-                    <ul class="feature-list">
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-file-invoice"></i> Advanced Invoice Creation
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-file-pdf"></i> Watermark-free PDFs
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-tachometer-alt"></i> Unlimited Templates
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-save"></i> Save Invoice History
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-image"></i> Custom Branding
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                        <li>
-                            <span class="feature-name">
-                                <i class="fas fa-headset"></i> Priority Support
-                            </span>
-                            <span class="feature-status available">✓ Included</span>
-                        </li>
-                    </ul>
+                <div class="grid grid-cols-2 mt-4">
+                    <div class="form-group">
+                        <label for="from">Your Business Name</label>
+                        <input type="text" id="from" placeholder="Your Company LLC">
+                    </div>
+                    <div class="form-group">
+                        <label for="to">Client Name</label>
+                        <input type="text" id="to" placeholder="Client Company Inc">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label for="invoice-number">Invoice #</label>
+                        <input type="text" id="invoice-number" value="INV-0001">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date">
+                    </div>
+                </div>
+                
+                <!-- Currency Selector -->
+                <div class="form-group currency-selector">
+                    <label for="currency">Currency</label>
+                    <select id="currency">
+                        <option value="USD">US Dollar ($)</option>
+                        <option value="INR" selected>Indian Rupee (₹)</option>
+                        <option value="EUR">Euro (€)</option>
+                        <option value="GBP">British Pound (£)</option>
+                        <option value="AUD">Australian Dollar (A$)</option>
+                        <option value="AED">UAE Dirham (د.إ)</option>
+                        <option value="SAR">Saudi Riyal (﷼)</option>
+                        <option value="QAR">Qatari Riyal (﷼)</option>
+                        <option value="PKR">Pakistani Rupee (₨)</option>
+                        <option value="CAD">Canadian Dollar (C$)</option>
+                        <option value="JPY">Japanese Yen (¥)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" rows="2" placeholder="Payment terms, thank you note, etc."></textarea>
+                </div>
+                
+                <h3>Choose Template Style</h3>
+                <div class="template-selector">
+                    <div class="template active" data-template="modern">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #4f46e5, #10b981);"></div>
+                        <div class="template-name">Modern</div>
+                        <span class="free-badge">Free</span>
+                    </div>
+                    <div class="template" data-template="classic">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #374151, #6b7280);"></div>
+                        <div class="template-name">Classic</div>
+                        <span class="free-badge">Free</span>
+                    </div>
+                    <div class="template" data-template="minimal">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #f3f4f6, #e5e7eb); border: 1px solid #d1d5db;"></div>
+                        <div class="template-name">Minimal</div>
+                        <span class="free-badge">Free</span>
+                    </div>
+                    <div class="template premium-template" data-template="elegant">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #111827, #1f2937);"></div>
+                        <div class="template-name">Elegant</div>
+                        <span class="premium-badge">Premium</span>
+                    </div>
+                    <div class="template premium-template" data-template="creative">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #f59e0b, #ef4444);"></div>
+                        <div class="template-name">Creative</div>
+                        <span class="premium-badge">Premium</span>
+                    </div>
+                    <div class="template premium-template" data-template="professional">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #1e40af, #1e3a8a);"></div>
+                        <div class="template-name">Professional</div>
+                        <span class="premium-badge">Premium</span>
+                    </div>
+                </div>
+                
+                <h3 class="mt-4">Invoice Items</h3>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th width="100">Quantity</th>
+                            <th width="150">Price</th>
+                            <th width="150">Total</th>
+                            <th width="50"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="items">
+                        <tr>
+                            <td><input type="text" class="item-desc" placeholder="Service or product description"></td>
+                            <td><input type="number" class="item-qty" value="1" min="1"></td>
+                            <td><input type="number" class="item-price" placeholder="0.00" step="0.01"></td>
+                            <td class="item-total">₹0.00</td>
+                            <td><button class="btn btn-outline remove-item">×</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <button id="add-item" class="btn btn-outline">
+                    <i class="fas fa-plus"></i> Add Item
+                </button>
+                
+                <div class="grid grid-cols-2 mt-8">
+                    <div></div>
+                    <div>
+                        <div class="form-group">
+                            <label for="tax-rate">Tax Rate (%)</label>
+                            <input type="number" id="tax-rate" value="0" min="0" max="100" step="0.1">
+                        </div>
+                        <table class="items-table">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td id="subtotal">₹0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <td id="tax">₹0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total</strong></td>
+                                <td id="total"><strong>₹0.00</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button id="generate-pdf" class="btn btn-primary">
+                        <i class="fas fa-file-pdf"></i> Download PDF Invoice
+                    </button>
+                    <div class="mt-4">
+                        <button id="upgrade-btn" class="btn btn-secondary">
+                            <i class="fas fa-crown"></i> Upgrade to Premium (₹75/3months)
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Features Comparison -->
+                <div class="features-comparison">
+                    <div class="feature-column free">
+                        <h3>
+                            <i class="fas fa-star"></i> Free Version
+                            <span class="badge">Free Forever</span>
+                        </h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-file-invoice"></i> Basic Invoice Creation
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-file-pdf"></i> PDF Download
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-water"></i> Watermarked PDFs
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-palette"></i> 3 Basic Templates
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-save"></i> Save Invoices
+                                </span>
+                                <span class="feature-status not-available">✗ Not Available</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-image"></i> Custom Logo
+                                </span>
+                                <span class="feature-status not-available">✗ Not Available</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-column premium">
+                        <h3>
+                            <i class="fas fa-crown"></i> Premium Version
+                            <span class="badge">₹75/3months</span>
+                        </h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-file-invoice"></i> Advanced Invoice Creation
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-file-pdf"></i> Watermark-free PDFs
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-tachometer-alt"></i> Unlimited Templates
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-save"></i> Save Invoice History
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-image"></i> Custom Branding
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                            <li>
+                                <span class="feature-name">
+                                    <i class="fas fa-headset"></i> Priority Support
+                                </span>
+                                <span class="feature-status available">✓ Included</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- About Page -->
+        <div class="policy-container" id="about" style="display: none;">
+            <h2>About 2-min Invoice Gen</h2>
+            <p>2-min Invoice Gen is a simple, fast, and professional invoice generator designed to help freelancers, small businesses, and entrepreneurs create beautiful invoices in minutes.</p>
+            
+            <h3>Our Mission</h3>
+            <p>We believe that creating professional invoices shouldn't be complicated or time-consuming. Our mission is to provide a tool that makes invoicing quick, easy, and effective.</p>
+            
+            <h3>Features</h3>
+            <ul>
+                <li>Create professional invoices in under 2 minutes</li>
+                <li>Download as PDF with one click</li>
+                <li>Multiple currency support</li>
+                <li>Beautiful, customizable templates</li>
+                <li>No registration required for free version</li>
+                <li>Premium features for power users</li>
+            </ul>
+            
+            <h3>Team</h3>
+            <p>2-min Invoice Gen is developed by a small team of developers and designers who understand the needs of freelancers and small business owners.</p>
+        </div>
+        
+        <!-- Privacy Policy Page -->
+        <div class="policy-container" id="privacy" style="display: none;">
+            <h2>Privacy Policy</h2>
+            <p>Last updated: June 10, 2023</p>
+            
+            <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
+            
+            <h3>Information We Collect</h3>
+            <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+            
+            <h4>Personal Data</h4>
+            <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
+            <ul>
+                <li>Email address</li>
+                <li>First name and last name</li>
+                <li>Usage Data</li>
+            </ul>
+            
+            <h3>Use of Your Personal Data</h3>
+            <p>The Company may use Personal Data for the following purposes:</p>
+            <ul>
+                <li>To provide and maintain our Service</li>
+                <li>To manage Your Account</li>
+                <li>For the performance of a contract</li>
+                <li>To contact You</li>
+                <li>To provide You with news, special offers and general information</li>
+                <li>To manage Your requests</li>
+                <li>For business transfers</li>
+                <li>For other purposes</li>
+            </ul>
+            
+            <h3>Security of Your Personal Data</h3>
+            <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure.</p>
+        </div>
+        
+        <!-- Terms of Service Page -->
+        <div class="policy-container" id="terms" style="display: none;">
+            <h2>Terms of Service</h2>
+            <p>Last updated: June 10, 2023</p>
+            
+            <p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the 2-min Invoice Gen website (the "Service") operated by us.</p>
+            
+            <h3>Your Access to and Use of the Service</h3>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+            
+            <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</p>
+            
+            <h3>Subscriptions</h3>
+            <p>Some parts of the Service are billed on a subscription basis ("Subscription(s)"). You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you select when purchasing a Subscription.</p>
+            
+            <p>At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or we cancel it. You may cancel your Subscription renewal either through your online account management page or by contacting our customer support team.</p>
+            
+            <h3>Content</h3>
+            <p>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material ("Content"). You are responsible for the Content that you post to the Service, including its legality, reliability, and appropriateness.</p>
+            
+            <p>By posting Content to the Service, you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through the Service.</p>
+        </div>
+        
+        <!-- Refund Policy Page -->
+        <div class="policy-container" id="refund" style="display: none;">
+            <h2>Refund & Cancellation Policy</h2>
+            <p>Last updated: June 10, 2023</p>
+            
+            <h3>Refund Policy</h3>
+            <p>We offer a full money-back guarantee for all purchases made on our website. If you are not satisfied with the product that you have purchased from us, you can get your money back no questions asked. You are eligible for a full reimbursement within 14 calendar days of your purchase.</p>
+            
+            <p>After the 14-day period you will no longer be eligible and won't be able to receive a refund. We encourage our customers to try the product (or service) in the first two weeks after their purchase to ensure it fits your needs.</p>
+            
+            <h3>Cancellation Policy</h3>
+            <p>If you subscribed to our premium service, you can cancel your subscription at any time. After cancellation, you will continue to have access to the premium features until the end of your current billing period.</p>
+            
+            <p>To cancel your subscription:</p>
+            <ol>
+                <li>Log in to your account</li>
+                <li>Go to the "Account Settings" page</li>
+                <li>Click on "Cancel Subscription"</li>
+                <li>Follow the instructions</li>
+            </ol>
+            
+            <h3>Contact Us</h3>
+            <p>If you have any questions about our Refund & Cancellation Policy, please contact us:</p>
+            <ul>
+                <li>By email: owaishaneef8@gmail.com</li>
+            </ul>
+        </div>
+        
+        <!-- Contact Page -->
+        <div class="policy-container" id="contact" style="display: none;">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Here's how you can reach us:</p>
+            
+            <h3>Email Support</h3>
+            <p>For general inquiries, support, or feedback:</p>
+            <p><strong>Email:</strong> owaishaneef8@gmail.com</p>
+            <p>We typically respond within 24-48 hours.</p>
+            
+            <h3>Premium Support</h3>
+            <p>Premium subscribers receive priority support with faster response times.</p>
+            
+            <h3>Business Hours</h3>
+            <p>Our support team is available Monday through Friday, 9:00 AM to 6:00 PM IST.</p>
+            
+            <h3>Feedback</h3>
+            <p>We're constantly working to improve 2-min Invoice Gen. If you have any suggestions or feature requests, please don't hesitate to reach out.</p>
+        </div>
+        
+        <!-- Help Center Page -->
+        <div class="policy-container" id="help" style="display: none;">
+            <h2>Help Center</h2>
+            <p>Find answers to common questions and get help with using 2-min Invoice Gen.</p>
+            
+            <h3>Getting Started</h3>
+            <p>Learn how to create your first invoice in minutes:</p>
+            <ol>
+                <li>Fill in your business and client details</li>
+                <li>Add invoice items with descriptions, quantities, and prices</li>
+                <li>Choose a template style</li>
+                <li>Download your invoice as a PDF</li>
+            </ol>
+            
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>Can't download PDF?</strong> Make sure your browser allows pop-ups for this site.</li>
+                <li><strong>Template not loading?</strong> Try refreshing the page or clearing your browser cache.</li>
+                <li><strong>Calculations incorrect?</strong> Check that all item quantities and prices are entered correctly.</li>
+            </ul>
+            
+            <h3>Need More Help?</h3>
+            <p>If you can't find what you're looking for, please <a href="#contact">contact our support team</a>.</p>
+        </div>
+        
+        <!-- FAQs Page -->
+        <div class="policy-container" id="faq" style="display: none;">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>General Questions</h3>
+            <div class="faq-item">
+                <h4>Is 2-min Invoice Gen free to use?</h4>
+                <p>Yes! Our basic invoice generation features are completely free to use. We offer premium features for users who need more advanced functionality.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Do I need to create an account?</h4>
+                <p>No, you can use the basic features without creating an account. However, creating an account allows you to save your invoices and access them later.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>What currencies are supported?</h4>
+                <p>We support multiple currencies including USD, INR, EUR, GBP, AUD, and more. You can select your preferred currency from the dropdown menu.</p>
+            </div>
+            
+            <h3>Premium Features</h3>
+            <div class="faq-item">
+                <h4>What do I get with the premium version?</h4>
+                <p>Premium features include watermark-free PDFs, unlimited templates, custom branding, invoice history, and priority support.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>How much does premium cost?</h4>
+                <p>Premium subscription costs ₹75 for 3 months of access to all premium features.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Can I cancel my premium subscription?</h4>
+                <p>Yes, you can cancel at any time. Your premium features will remain active until the end of your current billing period.</p>
+            </div>
+            
+            <h3>Technical Questions</h3>
+            <div class="faq-item">
+                <h4>What browsers are supported?</h4>
+                <p>2-min Invoice Gen works on all modern browsers including Chrome, Firefox, Safari, and Edge.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Is my data secure?</h4>
+                <p>We take data security seriously. Your invoice data is processed securely and we don't store sensitive financial information.</p>
+            </div>
+        </div>
+        
+        <!-- Profile Page -->
+        <div class="policy-container" id="profile" style="display: none;">
+            <h2>My Profile</h2>
+            
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="profile-name" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="profile-email" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label>Membership Status</label>
+                <input type="text" id="profile-membership" readonly>
+            </div>
+            
+            <button id="upgrade-profile-btn" class="btn btn-secondary" style="margin-top: 1rem;">
+                <i class="fas fa-crown"></i> Upgrade to Premium
+            </button>
+        </div>
+        
+        <!-- Invoices Page -->
+        <div class="policy-container" id="invoices" style="display: none;">
+            <h2>My Invoices</h2>
+            <p>View and manage your invoice history (Premium feature)</p>
+            
+            <div class="text-center" style="margin: 2rem 0;">
+                <i class="fas fa-file-invoice" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Invoice History</h3>
+                <p>Upgrade to premium to access your invoice history and saved templates.</p>
+                <button id="upgrade-invoices-btn" class="btn btn-secondary">
+                    <i class="fas fa-crown"></i> Upgrade to Premium
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#refund">Refund Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#faq">FAQs</a></li>
+                        <li><a href="#contact">Email Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 2-min Invoice Gen. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color: var(--danger);"></i> by OWAIS HANEEF</p>
+            </div>
+        </footer>
     </div>
-    
+
+    <!-- Login Page -->
+    <div class="auth-container" id="login-page">
+        <div class="auth-card">
+            <h2 class="auth-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
+            
+            <form class="auth-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="your@email.com" required>
+                    <div class="error-message" id="login-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary auth-submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div class="auth-container" id="signup-page" style="display: none;">
+        <div class="auth-card">
+            <h2 class="auth-title"><i class="fas fa-user-plus"></i> Create Account</h2>
+            
+            <form class="auth-form" id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Your Name" required>
+                    <div class="error-message" id="signup-name-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="your@email.com" required>
+                    <div class="error-message" id="signup-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                    <div class="error-message" id="signup-password-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                    <div class="error-message" id="signup-confirm-error"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary auth-submit">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Page (shown after successful login/signup) -->
+    <div class="success-container" id="success-page" style="display: none;">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title" id="success-title">Welcome Back!</h2>
+            <p class="success-message" id="success-message">You have successfully logged in to your 2-min Invoice Gen account.</p>
+            <button id="go-to-dashboard" class="btn btn-primary">
+                <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+            </button>
+        </div>
+    </div>
+
     <!-- Payment Modal -->
     <div id="payment-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h3 class="modal-title">Complete Your Payment</h3>
-            <p>Upgrade to premium for just $1 every 3 months</p>
+            <h3 class="modal-title">Upgrade to Premium (₹75/3months)</h3>
+            <p>Unlock all premium features with a simple one-time payment</p>
             
             <div class="payment-options">
                 <div class="payment-option active" data-payment="card">
@@ -1030,7 +1627,7 @@
             </div>
             
             <div id="payment-form">
-                <div id="card-payment" class="payment-method">
+                <div id="card-payment" class="payment-method active">
                     <div class="form-group mt-4">
                         <label>Card Number</label>
                         <input type="text" placeholder="4242 4242 4242 4242" required>
@@ -1051,7 +1648,7 @@
                     </div>
                 </div>
                 
-                <div id="upi-payment" class="payment-method" style="display: none;">
+                <div id="upi-payment" class="payment-method">
                     <div class="form-group mt-4">
                         <label>UPI ID</label>
                         <input type="text" placeholder="yourname@upi" required>
@@ -1059,30 +1656,30 @@
                     <p class="text-muted">You'll be redirected to your UPI app to complete payment</p>
                 </div>
                 
-                <div id="netbanking-payment" class="payment-method" style="display: none;">
+                <div id="netbanking-payment" class="payment-method">
                     <div class="form-group mt-4">
                         <label>Select Bank</label>
                         <select required>
                             <option value="">Select your bank</option>
-                            <option>Central Bank of India</option>
                             <option>State Bank of India</option>
                             <option>HDFC Bank</option>
                             <option>ICICI Bank</option>
                             <option>Axis Bank</option>
+                            <option>Punjab National Bank</option>
                         </select>
                     </div>
                     <p class="text-muted">You'll be redirected to your bank's website to complete payment</p>
                 </div>
                 
-                <div id="wallet-payment" class="payment-method" style="display: none;">
+                <div id="wallet-payment" class="payment-method">
                     <div class="form-group mt-4">
                         <label>Select Wallet</label>
                         <select required>
                             <option value="">Select your wallet</option>
                             <option>Paytm</option>
                             <option>PhonePe</option>
+                            <option>Google Pay</option>
                             <option>Amazon Pay</option>
-                            <option>MobiKwik</option>
                         </select>
                     </div>
                     <p class="text-muted">You'll be redirected to your wallet app to complete payment</p>
@@ -1090,7 +1687,7 @@
                 
                 <div class="form-group mt-4">
                     <label>Amount</label>
-                    <input type="text" value="$1.00" readonly>
+                    <input type="text" value="₹75.00" readonly>
                 </div>
                 
                 <div class="form-group">
@@ -1098,7 +1695,7 @@
                     <input type="text" value="3 months" readonly>
                 </div>
                 
-                <button id="rzp-button" class="btn btn-secondary" style="width: 100%;">
+                <button id="rzp-button" class="btn btn-secondary" style="width: 100%; margin-top: 1rem; padding: 1rem; font-size: 1rem;">
                     <i class="fas fa-lock"></i> Pay Securely with Razorpay
                 </button>
                 
@@ -1109,73 +1706,7 @@
         </div>
     </div>
     
-    <!-- Login Modal -->
-    <div id="login-modal" class="modal auth-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3 class="modal-title">Login to Your Account</h3>
-            
-            <div class="auth-form">
-                <div class="form-group">
-                    <label for="login-email">Email Address</label>
-                    <input type="email" id="login-email" placeholder="your@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" placeholder="Enter your password" required>
-                </div>
-                
-                <button class="btn btn-primary auth-submit" id="login-submit">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-                
-                <div class="auth-footer">
-                    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Signup Modal -->
-    <div id="signup-modal" class="modal auth-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3 class="modal-title">Create Your Account</h3>
-            
-            <div class="auth-form">
-                <div class="form-group">
-                    <label for="signup-name">Full Name</label>
-                    <input type="text" id="signup-name" placeholder="Your Name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" placeholder="your@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" placeholder="Create a password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="signup-confirm">Confirm Password</label>
-                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                </div>
-                
-                <button class="btn btn-primary auth-submit" id="signup-submit">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </button>
-                
-                <div class="auth-footer">
-                    <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Contact Info Modal -->
+    <!-- Contact Modal -->
     <div id="contact-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -1193,61 +1724,350 @@
             </div>
         </div>
     </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#" id="open-contact">Contact Us</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#refund">Refund Policy</a></li>
-                    <li><a href="#return">Return Policy</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="#help">Help Center</a></li>
-                    <li><a href="#faq">FAQs</a></li>
-                    <li><a href="#" id="open-contact-support">Email Support</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Connect</h3>
-                <ul>
-                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 2-Minute Invoice Generator. All rights reserved.</p>
-            <p>Designed by OWAIS HANEEF</p>
-        </div>
-    </footer>
 
     <!-- Razorpay Integration -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        // Simulate PHP backend functionality
+        const users = [];
+        let currentUser = null;
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Set today's date as default
             document.getElementById('date').valueAsDate = new Date();
             
+            // Show main content by default (changed from showLoginPage)
+            showMainContent();
+            
+            // Switch between login and signup pages
+            document.getElementById('switch-to-signup').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSignupPage();
+            });
+            
+            document.getElementById('switch-to-login').addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginPage();
+            });
+            
+            // Open login/signup from nav buttons
+            document.getElementById('open-login').addEventListener('click', function() {
+                showLoginPage();
+            });
+            
+            document.getElementById('open-signup').addEventListener('click', function() {
+                showSignupPage();
+            });
+            
+            // Form submissions
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                loginUser();
+            });
+            
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                registerUser();
+            });
+            
+            // Go to dashboard from success page
+            document.getElementById('go-to-dashboard').addEventListener('click', function() {
+                showMainContent();
+            });
+            
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Profile and invoices links
+            document.getElementById('profile-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showProfilePage();
+            });
+            
+            document.getElementById('invoices-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showInvoicesPage();
+            });
+            
+            // Upgrade buttons
+            document.getElementById('upgrade-btn').addEventListener('click', function() {
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+            
+            document.getElementById('upgrade-profile-btn').addEventListener('click', function() {
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+            
+            document.getElementById('upgrade-invoices-btn').addEventListener('click', function() {
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+            
+            // Navigation between pages
+            setupNavigation();
+            
+            // Invoice functionality (only after login)
+            setupInvoiceFunctionality();
+            
+            // Modal handling
+            setupModals();
+        });
+        
+        function showLoginPage() {
+            document.getElementById('login-page').style.display = 'flex';
+            document.getElementById('signup-page').style.display = 'none';
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-page').style.display = 'none';
+            
+            // Hide all policy pages
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+        
+        function showSignupPage() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('signup-page').style.display = 'flex';
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-page').style.display = 'none';
+            
+            // Hide all policy pages
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+        
+        function showSuccessPage(title, message) {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('signup-page').style.display = 'none';
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-page').style.display = 'flex';
+            
+            document.getElementById('success-title').textContent = title;
+            document.getElementById('success-message').textContent = message;
+            
+            // Hide all policy pages
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+        
+        function showMainContent() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('signup-page').style.display = 'none';
+            document.getElementById('success-page').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            
+            // Show home page by default
+            document.getElementById('home').style.display = 'block';
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Update UI based on user's premium status
+            updateUserUI();
+        }
+        
+        function showProfilePage() {
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            document.getElementById('profile').style.display = 'block';
+            
+            if (currentUser) {
+                document.getElementById('profile-name').value = currentUser.name;
+                document.getElementById('profile-email').value = currentUser.email;
+                document.getElementById('profile-membership').value = currentUser.isPremium ? "Premium Member" : "Free Member";
+            }
+        }
+        
+        function showInvoicesPage() {
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.policy-container').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            document.getElementById('invoices').style.display = 'block';
+        }
+        
+        function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Reset errors
+            document.getElementById('login-email-error').style.display = 'none';
+            document.getElementById('login-password-error').style.display = 'none';
+            
+            // Simple validation
+            if (!email) {
+                document.getElementById('login-email-error').textContent = 'Email is required';
+                document.getElementById('login-email-error').style.display = 'block';
+                return;
+            }
+            
+            if (!password) {
+                document.getElementById('login-password-error').textContent = 'Password is required';
+                document.getElementById('login-password-error').style.display = 'block';
+                return;
+            }
+            
+            // Check if user exists (simulating backend check)
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Successful login
+                currentUser = user;
+                showSuccessPage('Welcome Back!', 'You have successfully logged in to your 2-min Invoice Gen account.');
+                
+                // Update user profile in navbar
+                updateUserProfile();
+            } else {
+                document.getElementById('login-password-error').textContent = 'Invalid email or password';
+                document.getElementById('login-password-error').style.display = 'block';
+            }
+        }
+        
+        function registerUser() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            
+            // Reset errors
+            document.querySelectorAll('#signup-form .error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Validation
+            if (!name) {
+                document.getElementById('signup-name-error').textContent = 'Name is required';
+                document.getElementById('signup-name-error').style.display = 'block';
+                return;
+            }
+            
+            if (!email) {
+                document.getElementById('signup-email-error').textContent = 'Email is required';
+                document.getElementById('signup-email-error').style.display = 'block';
+                return;
+            }
+            
+            if (!password) {
+                document.getElementById('signup-password-error').textContent = 'Password is required';
+                document.getElementById('signup-password-error').style.display = 'block';
+                return;
+            }
+            
+            if (password !== confirm) {
+                document.getElementById('signup-confirm-error').textContent = 'Passwords do not match';
+                document.getElementById('signup-confirm-error').style.display = 'block';
+                return;
+            }
+            
+            // Check if email already exists
+            const emailExists = users.some(u => u.email === email);
+            
+            if (emailExists) {
+                document.getElementById('signup-email-error').textContent = 'Email already registered';
+                document.getElementById('signup-email-error').style.display = 'block';
+                return;
+            }
+            
+            // Add new user (simulating backend)
+            const newUser = {
+                name,
+                email,
+                password,
+                isPremium: false,
+                avatar: name.charAt(0).toUpperCase()
+            };
+            
+            users.push(newUser);
+            currentUser = newUser;
+            
+            // Update user profile in navbar
+            updateUserProfile();
+            
+            // Show success message
+            showSuccessPage('Account Created!', 'Your 2-min Invoice Gen account has been successfully created.');
+        }
+        
+        function logoutUser() {
+            currentUser = null;
+            showMainContent(); // Changed from showLoginPage to showMainContent
+            document.getElementById('auth-buttons').style.display = 'flex';
+            document.getElementById('user-profile').style.display = 'none';
+        }
+        
+        function updateUserProfile() {
+            if (currentUser) {
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('user-profile').style.display = 'flex';
+                document.getElementById('user-avatar').textContent = currentUser.avatar;
+                document.getElementById('user-display-name').textContent = currentUser.name;
+                
+                if (currentUser.isPremium) {
+                    document.getElementById('user-display-name').innerHTML = currentUser.name + '<span class="premium-badge">Premium</span>';
+                }
+            }
+        }
+        
+        function updateUserUI() {
+            if (!currentUser) return;
+            
+            if (currentUser.isPremium) {
+                // Hide watermark for premium users
+                document.getElementById('watermark').style.display = 'none';
+                
+                // Enable all premium templates
+                document.querySelectorAll('.premium-template').forEach(template => {
+                    template.classList.remove('premium-template');
+                });
+            } else {
+                document.getElementById('watermark').style.display = 'block';
+            }
+        }
+        
+        function setupNavigation() {
+            // Navigation between pages
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    if (targetId === 'home') {
+                        document.getElementById('home').style.display = 'block';
+                        document.querySelectorAll('.policy-container').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        return;
+                    }
+                    
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Hide all pages
+                        document.getElementById('home').style.display = 'none';
+                        document.querySelectorAll('.policy-container').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        
+                        // Show target page
+                        if (targetElement.classList.contains('policy-container')) {
+                            targetElement.style.display = 'block';
+                        }
+                        
+                        // Scroll to top
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+        }
+        
+        function setupInvoiceFunctionality() {
             // Add item row
             document.getElementById('add-item').addEventListener('click', addItemRow);
             
@@ -1277,81 +2097,6 @@
             // Generate PDF
             document.getElementById('generate-pdf').addEventListener('click', generatePDF);
             
-            // Modal handling
-            const modals = {
-                payment: document.getElementById('payment-modal'),
-                login: document.getElementById('login-modal'),
-                signup: document.getElementById('signup-modal'),
-                contact: document.getElementById('contact-modal')
-            };
-            
-            // Open modals
-            document.getElementById('upgrade-btn').addEventListener('click', function() {
-                modals.payment.style.display = 'flex';
-            });
-            
-            document.getElementById('open-login').addEventListener('click', function() {
-                modals.login.style.display = 'flex';
-            });
-            
-            document.getElementById('open-signup').addEventListener('click', function() {
-                modals.signup.style.display = 'flex';
-            });
-            
-            document.getElementById('open-contact').addEventListener('click', function(e) {
-                e.preventDefault();
-                modals.contact.style.display = 'flex';
-            });
-            
-            document.getElementById('open-contact-support').addEventListener('click', function(e) {
-                e.preventDefault();
-                modals.contact.style.display = 'flex';
-            });
-            
-            // Switch between login and signup
-            document.getElementById('switch-to-signup').addEventListener('click', function(e) {
-                e.preventDefault();
-                modals.login.style.display = 'none';
-                modals.signup.style.display = 'flex';
-            });
-            
-            document.getElementById('switch-to-login').addEventListener('click', function(e) {
-                e.preventDefault();
-                modals.signup.style.display = 'none';
-                modals.login.style.display = 'flex';
-            });
-            
-            // Close modals
-            document.querySelectorAll('.close-modal').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    this.closest('.modal').style.display = 'none';
-                });
-            });
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = 'none';
-                }
-            });
-            
-            // Payment method selection
-            const paymentOptions = document.querySelectorAll('.payment-option');
-            paymentOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    paymentOptions.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show corresponding payment form
-                    document.querySelectorAll('.payment-method').forEach(method => {
-                        method.style.display = 'none';
-                    });
-                    
-                    const method = this.getAttribute('data-payment');
-                    document.getElementById(`${method}-payment`).style.display = 'block';
-                });
-            });
-            
             // Logo upload
             const logoInput = document.getElementById('logo-input');
             const logoPreview = document.getElementById('logo-preview');
@@ -1379,8 +2124,8 @@
             const templates = document.querySelectorAll('.template');
             templates.forEach(template => {
                 template.addEventListener('click', function() {
-                    if (this.classList.contains('premium-template')) {
-                        modals.payment.style.display = 'flex';
+                    if (this.classList.contains('premium-template') && (!currentUser || !currentUser.isPremium)) {
+                        document.getElementById('payment-modal').style.display = 'flex';
                         return;
                     }
                     
@@ -1389,28 +2134,82 @@
                 });
             });
             
+            // Initialize with one empty item row
+            addItemRow();
+        }
+        
+        function setupModals() {
+            // Payment Modal
+            document.getElementById('upgrade-btn').addEventListener('click', function() {
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+            
+            // Contact Modal
+            document.querySelector('.nav-contact').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('contact-modal').style.display = 'flex';
+            });
+            
+            // Close modals
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+            
+            // Payment method selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding payment form
+                    document.querySelectorAll('.payment-method').forEach(method => {
+                        method.classList.remove('active');
+                    });
+                    
+                    const method = this.getAttribute('data-payment');
+                    document.getElementById(`${method}-payment`).classList.add('active');
+                });
+            });
+            
             // Razorpay payment integration
             document.getElementById('rzp-button').addEventListener('click', function() {
                 const options = {
-                    key: 'YOUR_RAZORPAY_KEY_ID', // Replace with your actual key
+                    key: 'rzp_test_1DP5mmOlF5G5ag', // Test key - replace with your actual key
                     amount: 7500, // ₹75 in paise (₹1 = 100 paise)
                     currency: 'INR',
-                    name: '2-Minute Invoice Generator',
+                    name: '2-min Invoice Gen Premium',
                     description: 'Premium Subscription (3 Months)',
                     image: 'https://example.com/your_logo.png',
-                    order_id: 'order_123', // This comes from your server
+                    order_id: 'order_123', // This would come from your server
                     handler: function(response) {
                         alert('Payment successful! Premium features activated.');
-                        // Verify payment on your server
-                        modals.payment.style.display = 'none';
+                        
+                        // Update user to premium
+                        if (currentUser) {
+                            currentUser.isPremium = true;
+                            updateUserProfile();
+                            updateUserUI();
+                        }
+                        
+                        document.getElementById('payment-modal').style.display = 'none';
                     },
                     prefill: {
-                        name: document.getElementById('signup-name')?.value || 'Customer',
-                        email: document.getElementById('signup-email')?.value || 'customer@example.com',
+                        name: currentUser?.name || 'Customer',
+                        email: currentUser?.email || 'customer@example.com',
                         contact: '9000000000'
                     },
                     notes: {
-                        address: 'Central Bank Settlement A/C'
+                        address: '2-min Invoice Gen Premium Subscription'
                     },
                     theme: {
                         color: '#4f46e5'
@@ -1420,44 +2219,7 @@
                 const rzp = new Razorpay(options);
                 rzp.open();
             });
-            
-            // Form submissions
-            document.getElementById('signup-submit').addEventListener('click', function() {
-                const name = document.getElementById('signup-name').value;
-                const email = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-password').value;
-                const confirm = document.getElementById('signup-confirm').value;
-                
-                if (password !== confirm) {
-                    alert('Passwords do not match');
-                    return;
-                }
-                
-                // In a real app, you would:
-                // 1. Validate inputs
-                // 2. Send to your server
-                // 3. Handle response
-                
-                alert('Account created successfully!');
-                modals.signup.style.display = 'none';
-            });
-            
-            document.getElementById('login-submit').addEventListener('click', function() {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                
-                // In a real app, you would:
-                // 1. Validate inputs
-                // 2. Send to your server
-                // 3. Handle response
-                
-                alert('Login successful!');
-                modals.login.style.display = 'none';
-            });
-            
-            // Initialize with one empty item row
-            addItemRow();
-        });
+        }
         
         function addItemRow() {
             const tbody = document.getElementById('items');
@@ -1548,13 +2310,11 @@
         }
         
         function generatePDF() {
-            // Track downloads for upsell
-            let downloadCount = localStorage.getItem('downloadCount') || 0;
-            downloadCount++;
-            localStorage.setItem('downloadCount', downloadCount);
-            
-            if (downloadCount >= 3) {
+            // Check if using a premium template without premium access
+            const activeTemplate = document.querySelector('.template.active');
+            if (activeTemplate.classList.contains('premium-template') && (!currentUser || !currentUser.isPremium)) {
                 document.getElementById('payment-modal').style.display = 'flex';
+                return;
             }
             
             const currency = document.getElementById('currency').value;
@@ -1584,7 +2344,7 @@
                 subtotal: document.getElementById('subtotal').textContent,
                 tax: document.getElementById('tax').textContent,
                 total: document.getElementById('total').textContent,
-                template: document.querySelector('.template.active').getAttribute('data-template')
+                template: activeTemplate.getAttribute('data-template')
             };
             
             document.querySelectorAll('#items tr').forEach(row => {
@@ -1596,8 +2356,17 @@
                 });
             });
             
-            console.log('Generating PDF with data:', invoiceData);
-            alert('In a real implementation, this would download a PDF. Check console for invoice data.');
+            // In a real implementation, this would generate and download a PDF
+            // For demo purposes, we'll create a blob and download it
+            const blob = new Blob([JSON.stringify(invoiceData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `invoice_${invoiceData.number}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
